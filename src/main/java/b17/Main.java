@@ -14,6 +14,8 @@ public class Main {
 
         Model model = new Model();
         View view = new View( model, frame );
+        new Controller( model, view );
 
+        frame.setVisible( true );
     }
 }
