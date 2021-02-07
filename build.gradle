@@ -1,2 +1,20 @@
 
 apply plugin: 'java'
+
+version = "1.0.0"
+
+jar {
+    manifest {
+        attributes (
+                'Implementation-Title': 'B-17',
+                'Implementation-Version': version,
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'b17.Main'
+        )
+    }
+    baseName = "B-17"
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+}
+
+defaultTasks "build", "jar"
